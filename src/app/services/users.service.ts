@@ -1,6 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { User } from '../user';
+import { UserAuth } from '../interfaces/user-auth';
+import { User } from '../interfaces/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +12,10 @@ export class UsersService {
   users$ = signal<User[]>([]);
   user$ = signal<User>({} as User);
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private router:Router) { }
 
   private refreshUsers() {
-    this.http.get<User[]>(`${this.url}/users`)
+    this.http.get<User[]>(`${this.url}/clients`)
       .subscribe(users => {
         this.users$.set(users);
       });
@@ -24,17 +26,13 @@ export class UsersService {
     return this.users$();
   }
   
-  registeruser(user:User){
-      console.log(user)
-      this.http.post(`${this.url}/users`, user, { responseType: 'text' }).subscribe({
-        /*error: (error) => {
-          alert('Failed to create user');
-          console.error(error);*/
-
+  registerexpert(data: FormData){
+      this.http.post(`${this.url}/registerexpert`, data, { responseType: 'text' }).subscribe({
           next: () => {
-            alert('User created successfully!');
+            alert('Votre compte est crée avec succès!');
             // Rafraîchir la liste des utilisateurs après la création réussie
             this.refreshUsers();
+            this.router.navigate(['/connexion']);
           },
           error: (error: HttpErrorResponse) => {
             let errorMessage = 'Failed to create user';

@@ -17,7 +17,7 @@
 	color:#fff;
 }
 .btnsec{
-	color:#f07d1a;
+	color:#0476D9;
 }
 .header .logo {
 	float: left;
@@ -38,9 +38,9 @@
 .header .nav li:last-child{
 	margin:0;
 }
-.header .nav li a {
+.header .nav>li>a {
 	font-size: 14px;
-	font-weight: 500;
+	font-weight: 400;
 	text-transform: capitalize;
 	padding: 25px 12px;
 	position: relative;
@@ -52,7 +52,7 @@
    text-decoration:none;
 }
 .header .btnprim:hover {
-	color: #f07d1a;
+	color: #0476D9;
  }
 .header .btnsec:hover {
 	outline: 0;
@@ -67,7 +67,7 @@
 	bottom: 0;
 	height: 3px;
 	width:0%;
-	background: #f07d1a;
+	background: #0476D9;
 	border-radius: 5px 5px 0 0;
 	opacity:0;
 	visibility:hidden;
@@ -81,7 +81,7 @@
 	width: 100%;
 }
 .header .nav li.active a{
-	color:#f07d1a;;
+	color:#0476D9;
 }
 .header .nav li:hover a:before{
 	opacity:1;
@@ -89,7 +89,7 @@
 	visibility:visible;
 }
 .header .nav li:hover a{
-	color:#f07d1a;
+	color:#0476D9;
 }
 .header .nav li a i {
 	display: inline-block;
@@ -133,7 +133,7 @@
 	opacity: 0;
 	visibility: hidden;
 	top: 74px;
-	border-left:3px solid #f07d1a;
+	border-left:3px solid #0476D9;
 }
 .header .nav li:hover .dropdown{
 	opacity:1;
@@ -166,14 +166,34 @@
 	border-bottom:0px;
 }
 .header .nav li .dropdown li:hover a{
-	color:#f07d1a;
+	color:#0476D9;
 }
 .header .nav li .dropdown li a:hover{
 	border-color:transparent;
+}
+.header a:hover{
+	color:#fff
 }
 .logo img{
 	height: 75px;
 	width: auto;
 }
-
-   
+/* Initially hide elements with [hidden] attribute */
+[hidden] {
+	display: none !important;
+  }
+  li>a:focus,.nav>li>a:hover{color:#262626;text-decoration:none;background-color:#fff}
+  a{
+	color: #262626;
+  }
+  .profile-image {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	object-fit: cover;
+  }
+li{
+	display: flex;
+  align-items: center;   /* Pour centrer verticalement */
+  
+}

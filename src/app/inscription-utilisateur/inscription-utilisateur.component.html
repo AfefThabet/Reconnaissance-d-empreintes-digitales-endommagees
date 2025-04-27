@@ -1,44 +1,102 @@
-<div class="container">
-    <h2>S'inscrire</h2>
-    <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()" novalidate>
-        <div>
-            <label for="name">Nom d'utilisateur :</label>
-            <input type="text" id="name" formControlName="name">
-            <div *ngIf="inscriptionForm.get('name')?.invalid && (inscriptionForm.get('name')?.dirty || inscriptionForm.get('name')?.touched)" class="error-message">
-                <div *ngIf="inscriptionForm.get('username')?.errors?.['required']">Le nom d'utilisateur est requis.</div>
-            </div>
+
+<div class="container forms">
+    <div class="form signup">
+      <div class="form-content">
+        <header>S'inscrire</header>
+        <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()" novalidate>
+  
+          <div class="field input-field">
+            <input type="text" id="first_name" formControlName="first_name" placeholder="Prénom" class="input">
+          </div>
+          <div *ngIf="inscriptionForm.get('first_name')?.invalid && (inscriptionForm.get('first_name')?.dirty || inscriptionForm.get('first_name')?.touched)" class="error-message">
+            <div *ngIf="inscriptionForm.get('first_name')?.errors?.['required']">Le prénom est obligatoire.</div>
+          </div>
+  
+          <div class="field input-field">
+            <input type="text" id="last_name" formControlName="last_name" placeholder="Nom" class="input">
+          </div>
+          <div *ngIf="inscriptionForm.get('last_name')?.invalid && (inscriptionForm.get('last_name')?.dirty || inscriptionForm.get('last_name')?.touched)" class="error-message">
+            <div *ngIf="inscriptionForm.get('last_name')?.errors?.['required']">Le nom est obligatoire.</div>
+          </div>
+  
+          <div class="field input-field">
+            <input type="number" id="cin" formControlName="cin" placeholder="CIN" class="input">
+          </div>
+          <div *ngIf="inscriptionForm.get('cin')?.invalid && (inscriptionForm.get('cin')?.dirty || inscriptionForm.get('cin')?.touched)" class="error-message">
+            <div *ngIf="inscriptionForm.get('cin')?.errors?.['required']">Le CIN est obligatoire.</div>
+          </div>
+  
+          <div class="field input-field">
+            <input type="text" id="matricule" formControlName="matricule" placeholder="Matricule" class="input">
+          </div>
+          <div *ngIf="inscriptionForm.get('matricule')?.invalid && (inscriptionForm.get('matricule')?.dirty || inscriptionForm.get('matricule')?.touched)" class="error-message">
+            <div *ngIf="inscriptionForm.get('matricule')?.errors?.['required']">Le matricule est obligatoire.</div>
+          </div>
+
+          <div class="field input-field">
+            <input type="email" id="email" formControlName="email" placeholder="Email" class="input">
+          </div>
+          <div *ngIf="inscriptionForm.get('email')?.invalid && (inscriptionForm.get('email')?.dirty || inscriptionForm.get('email')?.touched)" class="error-message">
+            <div *ngIf="inscriptionForm.get('email')?.errors?.['required']">L'email est obligatoire.</div>
+            <div *ngIf="inscriptionForm.get('email')?.errors?.['email']">Format d'email invalide.</div>
+          </div>
+
+          <div class="field input-field">
+            <input type="password" placeholder="Mot de passe" class="password" id="password" formControlName="password">
         </div>
-        <div>
-            <label for="email">Email :</label>
-            <input type="email" id="email" formControlName="email">
-            <div *ngIf="inscriptionForm.get('email')?.invalid && (inscriptionForm.get('email')?.dirty || inscriptionForm.get('email')?.touched)" class="error-message">
-                <div *ngIf="inscriptionForm.get('email')?.errors?.['required']">L'email est requis.</div>
-                <div *ngIf="inscriptionForm.get('email')?.errors?.['email']">Format d'email invalide.</div>
-            </div>
+        <div *ngIf="inscriptionForm.get('password')?.invalid && (inscriptionForm.get('password')?.dirty || inscriptionForm.get('password')?.touched)" class="error-message">
+            <div *ngIf="inscriptionForm.get('password')?.errors?.['required']">Le mot de passe est obligatoire.</div>
+            <div *ngIf="inscriptionForm.get('password')?.errors?.['minlength']">Le mot de passe doit comporter au moins 6 caractères.</div>
         </div>
-        <div>
-            <label for="phone">Telephone :</label>
-            <input type="tel" id="phone" formControlName="phone">
-            <div *ngIf="inscriptionForm.get('phone')?.invalid && (inscriptionForm.get('phone')?.dirty || inscriptionForm.get('phone')?.touched)" class="error-message">
-                <div *ngIf="inscriptionForm.get('phone')?.errors?.['required']">Le numero de telephone est requis.</div>
-            </div>
+
+        <div class="field input-field">
+            <input type="password" placeholder="Confirmer le mot de passe" class="password" id="confirmPassword" formControlName="confirmPassword">
+            <i class='bx bx-hide eye-icon'></i>
         </div>
-        <div>
-            <label for="password">Mot de passe :</label>
-            <input type="password" id="password" formControlName="password">
-            <div *ngIf="inscriptionForm.get('password')?.invalid && (inscriptionForm.get('password')?.dirty || inscriptionForm.get('password')?.touched)" class="error-message">
-                <div *ngIf="inscriptionForm.get('password')?.errors?.['required']">Le mot de passe est requis.</div>
-                <div *ngIf="inscriptionForm.get('password')?.errors?.['minlength']">Le mot de passe doit comporter au moins 6 caractères.</div>
-            </div>
+        <div *ngIf="inscriptionForm.get('confirmPassword')?.invalid && (inscriptionForm.get('confirmPassword')?.dirty || inscriptionForm.get('confirmPassword')?.touched)" class="error-message">
+            <div *ngIf="inscriptionForm.get('confirmPassword')?.errors?.['required']">Veuillez confirmer votre mot de passe.</div>
         </div>
-        <div>
-            <label for="confirmPassword">Confirmer le mot de passe :</label>
-            <input type="password" id="confirmPassword" formControlName="confirmPassword">
-            <div *ngIf="inscriptionForm.get('confirmPassword')?.invalid && (inscriptionForm.get('confirmPassword')?.dirty || inscriptionForm.get('confirmPassword')?.touched)" class="error-message">
-                <div *ngIf="inscriptionForm.get('confirmPassword')?.errors?.['required']">Veuillez confirmer votre mot de passe.</div>
-            </div>
-            <div *ngIf="!inscriptionForm.get('confirmPassword')?.invalid && !(inscriptionForm.get('confirmPassword')?.dirty && !inscriptionForm.get('confirmPassword')?.touched) && inscriptionForm.errors?.['PasswordNoMatch']" class="error-message">Les mots de passe ne correspondent pas.</div>
+        <div *ngIf="!inscriptionForm.get('confirmPassword')?.invalid && !(inscriptionForm.get('confirmPassword')?.dirty && !inscriptionForm.get('confirmPassword')?.touched) && inscriptionForm.errors?.['PasswordNoMatch']" class="error-message">Les mots de passe ne correspondent pas.</div>
+
+          <div class="field input-field">
+            <select id="grade" formControlName="grade" class="input">
+              <option value="" disabled selected>Sélectionnez votre grade</option>
+              <option value="Inspecteur">Inspecteur</option>
+              <option value="Technicien criminaliste">Technicien criminaliste</option>
+            </select>
+          </div>
+          <div *ngIf="inscriptionForm.get('grade')?.invalid && (inscriptionForm.get('grade')?.dirty || inscriptionForm.get('grade')?.touched)" class="error-message">
+            <div *ngIf="inscriptionForm.get('grade')?.errors?.['required']">Le grade est obligatoire.</div>
+          </div>
+          
+  
+          <div class="field input-field">
+            <input type="text" id="agence_ratt" formControlName="agence_ratt" placeholder="Agence de rattachement" class="input">
+          </div>
+          <div *ngIf="inscriptionForm.get('agence_ratt')?.invalid && (inscriptionForm.get('agence_ratt')?.dirty || inscriptionForm.get('agence_ratt')?.touched)" class="error-message">
+            <div *ngIf="inscriptionForm.get('agence_ratt')?.errors?.['required']">L'agence est obligatoire.</div>
+          </div>
+  
+          <div class="field input-field">
+            <input type="text" id="service" formControlName="service" placeholder="Service" class="input">
+          </div>
+          <div *ngIf="inscriptionForm.get('service')?.invalid && (inscriptionForm.get('service')?.dirty || inscriptionForm.get('service')?.touched)" class="error-message">
+            <div *ngIf="inscriptionForm.get('service')?.errors?.['required']">Le service est obligatoire.</div>
+          </div>
+          <div class="field input-field">
+          <input type="file" (change)="onFileChange($event)" class="input" #fileInput />
+          </div>
+          <div class="field button-field">
+            <button type="submit" [disabled]="!inscriptionForm.valid" class="btn btnprim">S'inscrire</button>
+          </div>
+        </form>
+  
+        <div class="form-link">
+          <span>Vous avez déjà un compte? <a routerLink="/connexion">Se connecter</a></span>
         </div>
-        <button type="submit" [disabled]="!inscriptionForm.valid" class="btn btnprim">Soumettre</button>
-    </form>
-</div>
+      </div>
+    </div>
+  </div>
+  
+
+  

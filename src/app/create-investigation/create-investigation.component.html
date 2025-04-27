@@ -1,0 +1,108 @@
+<mat-horizontal-stepper [linear]="true" #stepper (selectionChange)="onStepChange($event)">
+  <!-- Étape 1 : Formulaire -->
+  <mat-step [stepControl]="investigationForm" label="Détails de l'enquête">
+    <form [formGroup]="investigationForm">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Titre</mat-label>
+        <input matInput formControlName="title" placeholder="Entrez le titre de l’enquête" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" placeholder="Entrez la description"></textarea>
+      </mat-form-field>
+
+      <div class="actions">
+        <button mat-button matStepperNext [disabled]="!investigationForm.valid">Suivant</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <!-- Étape 2 : Sélection image -->
+  <mat-step [stepControl]="imageForm" label="Image de l'empreinte">
+    <ngx-file-drop
+      (onFileDrop)="onFileDrop($event)"
+      [dropZoneLabel]="' '" 
+      [dropZoneClassName]="'custom-drop-zone'">
+      <input type="file" accept="image/*" (change)="onImageSelected($event)" hidden #fileInput />
+      <ng-template ngx-file-drop-content-tmp>
+        <div class="file-drop-content" (click)="fileInput.click()" style="cursor: pointer;">
+          <p>📂 Glissez une image ici ou cliquez pour sélectionner</p>
+        </div>
+      </ng-template>
+    </ngx-file-drop>
+
+    <div *ngIf="imagePreviewUrl" class="image-preview">
+      <p><strong>Fichier sélectionné :</strong> {{ imageFile?.name }}</p>
+      <img [src]="imagePreviewUrl" alt="Aperçu de l'image" />
+    </div>
+
+    <div class="actions">
+      <button mat-button matStepperPrevious>Retour</button>
+      <button mat-button matStepperNext [disabled]="!imageFile">Suivant</button>
+    </div>
+  </mat-step>
+
+  <!-- Étape 3 : Résultats -->
+  <mat-step label="Analyse" [completed]="isSaved">
+    <div class="analysis-step">
+      <!-- État de chargement -->
+      <div *ngIf="isAnalyzing" class="analyzing-status">
+        <mat-progress-spinner diameter="40" mode="indeterminate"></mat-progress-spinner>
+        <p>Analyse en cours...</p>
+      </div>
+          <div class="results-container">
+            <div *ngIf="!isAnalyzing">
+              <h3>Résultats de l'analyse</h3>
+              <div class="model-result">
+                <div *ngFor="let model of mlModels">
+                  <div *ngIf="predictionResults[model.value]" class="analysis-results">
+                    <app-prediction [result]="predictionResults[model.value]"></app-prediction>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isSavingInvestigation" class="progress-bar">
+            <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+            <p>Enregistrement de l'enquête en cours...</p>
+          </div>
+      <div class="actions">
+        <button mat-button matStepperPrevious>Retour</button>
+        <button mat-raised-button 
+                color="primary" 
+                (click)="onAddInvestigation()"
+                [disabled]="isSavingInvestigation">
+          <mat-icon>save</mat-icon>
+          Enregistrer l'enquête
+        </button>
+      </div>
+    </div>
+  </mat-step>
+  <!-- Étape 4 : Validation des modèles -->
+<mat-step label="Validation des résultats">
+  <form [formGroup]="validationForm">
+    <h3>Modèles à valider</h3>
+  
+    <div formArrayName="modelsToValidate" class="checkbox-group">
+      <div *ngFor="let model of mlModels; let i = index" class="checkbox-item">
+        <mat-checkbox [formControlName]="i">
+          {{ model.value }}
+        </mat-checkbox>
+      </div>
+    </div>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Décision</mat-label>
+      <textarea matInput formControlName="comment" placeholder="Ajouter votre décision..."></textarea>
+    </mat-form-field>
+
+    <div class="actions">
+      <button mat-button color="warn" (click)="onCancel()">Annuler</button>
+      <button mat-raised-button color="primary" (click)="onSubmitValidation()">Valider</button>
+    </div>
+  </form>
+</mat-step>
+  
+
+</mat-horizontal-stepper>

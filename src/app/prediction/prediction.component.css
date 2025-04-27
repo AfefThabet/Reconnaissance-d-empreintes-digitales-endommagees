@@ -1,0 +1,153 @@
+.result-card {
+  margin: 1.5rem auto;
+  max-width: 600px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+  mat-card-title {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  mat-card-subtitle {
+    font-size: 0.95rem;
+    color: #666;
+  }
+
+  .result-details {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0;
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+
+      .label {
+        font-weight: 600;
+        color: #555;
+      }
+
+      .value {
+        font-size: 1.1rem;
+        color: #2e7d32;
+      }
+    }
+  }
+
+  .metadata {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    color: #888;
+
+    mat-icon {
+      font-size: 16px;
+      margin-right: 0.3rem;
+      vertical-align: middle;
+    }
+  }
+}
+
+.model-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1.5rem 0;
+
+  button {
+    min-width: 160px;
+  }
+}
+
+.model-selector {
+  display: flex;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+
+  .model-card {
+    padding: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    flex: 1 1 150px;
+    text-align: center;
+    background-color: #fafafa;
+
+    &:hover {
+      background-color: #e0f7fa;
+      border-color: #00acc1;
+    }
+
+    &.selected {
+      border-color: #00796b;
+      background-color: #b2dfdb;
+    }
+  }
+}
+
+.error {
+  color: #d32f2f;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.progress {
+  margin-top: 1rem;
+  text-align: center;
+
+  progress {
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    appearance: none;
+  }
+}
+
+.analyze-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.results {
+  margin-top: 2rem;
+
+  .metadata {
+    font-size: 0.9rem;
+    color: #555;
+  }
+
+  .predictions {
+    margin-top: 1rem;
+
+    .prediction-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+
+      .label {
+        font-weight: 600;
+      }
+
+      .confidence {
+        color: #388e3c;
+      }
+    }
+  }
+}

@@ -1,10 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');*/
+
 html {
     font-family: 'Poppins', sans-serif;
-   -moz-text-size-adjust: 100%;
-   -webkit-text-size-adjust: 100%;
-   -ms-text-size-adjust: 100%;
-   text-size-adjust: 100%;
 }
 html,body {
    height: 100%;
@@ -44,7 +42,6 @@ h1, h2, h3, h4, h5, h6 {
    margin: 0;
 }
 p {
-   color:#757575;
    margin: 0;
    line-height:24px;
    font-weight:400;
@@ -92,11 +89,9 @@ a:hover{
    border-radius:4px;
 }
 .btnprim {
-    background: #f07d1a;
+    background: #0476D9;
 }
-.btn:hover{
-   color:#fff;
-}
+
 .btnprim:before{
    content: "";
    position: absolute;
@@ -123,7 +118,7 @@ a:hover{
     bottom: 0;
     left: 0;
     right: 0;
-    background: #f07d1a;
+    background: #0476D9;
     -webkit-transform: scaleX(0);
     transform: scaleX(0);
     -webkit-transform-origin: 50%;
@@ -148,7 +143,7 @@ html {
 *,
 *:before,
 *:after {
-   /* Inherit box-sizing to make it easier to change the property for components that leverage other behavior; see https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+  
    box-sizing: inherit;
 }
 
@@ -194,7 +189,6 @@ body{
     font-family: 'Poppins', sans-serif;
 	font-weight: 400;
 	font-size:14px;
-	color:#888;
 }
 
 /*bootstrap.min.css*/
@@ -208,15 +202,6 @@ body{
     --font-family-monospace: "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace
 }
 
-html {
-    font-family: sans-serif;
-    line-height: 1.15;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    -ms-overflow-style: scrollbar;
-    -webkit-tap-highlight-color: transparent
-}
-
 footer,
 header,
 main,
@@ -226,7 +211,7 @@ nav{
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-family: "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -265,14 +250,13 @@ ul ul {
 }
 
 a {
-    color: #007bff;
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects
 }
 
 a:hover {
-    color: #f07d1a;
+    color: #0476D9;
     text-decoration: underline
 }
 
@@ -354,11 +338,11 @@ h6 {
     font-size: 1.25rem
 }
 
-.blockquote-footer {
+/*.blockquote-footer {
     display: block;
     font-size: 80%;
     color: #868e96
-}
+}*/
 
 .blockquote-footer::before {
     content: "\2014 \00A0"
@@ -371,7 +355,7 @@ h6 {
     margin-right: auto;
     margin-left: auto
 }
-
+/*
 @media (min-width:576px) {
     .container {
         max-width: 540px
@@ -394,7 +378,7 @@ h6 {
     .container {
         max-width: 1140px
     }
-}
+}*/
 
 .container-fluid {
     width: 100%;
@@ -524,7 +508,7 @@ h6 {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    border: 1px solid #f07d1a;
+    border: 1px solid rgb(66, 122, 161);
     padding: .375rem .75rem;
     font-size: 1rem;
     line-height: 1.5;
@@ -540,7 +524,7 @@ h6 {
 .btn.focus,
 .btn:focus {
     outline: 0;
-    box-shadow: 0 0 0 .2rem rgba(240,125,26, .25)
+    box-shadow: 0 0 0 .2rem rgba(66, 122, 161, .25)
 }
 
 .btn.disabled,
@@ -569,11 +553,22 @@ fieldset[disabled] a.btn {
 }
 
 .btnprim:hover {
-	color: #f07d1a;
+    outline: 0;
+	color: #0476D9 !important;
  }
 .btnsec:hover {
 	outline: 0;
 	text-decoration:none;
 	color: #fff;
  }
+ .required input:after { content:"*"; }
  
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

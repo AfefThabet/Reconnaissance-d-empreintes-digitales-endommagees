@@ -1,0 +1,59 @@
+<!--<div class="container">
+    <h2>Se connecter</h2>
+    <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()" novalidate>
+        <div>
+            <label for="email">Email :</label>
+            <input type="email" id="email" formControlName="email">
+            <div *ngIf="inscriptionForm.get('email')?.invalid && (inscriptionForm.get('email')?.dirty || inscriptionForm.get('email')?.touched)" class="error-message">
+                <div *ngIf="inscriptionForm.get('email')?.errors?.['required']">L'email est requis.</div>
+                <div *ngIf="inscriptionForm.get('email')?.errors?.['email']">Format d'email invalide.</div>
+            </div>
+        </div>
+        <div>
+            <label for="password">Mot de passe :</label>
+            <input type="password" id="password" formControlName="password">
+            <div *ngIf="inscriptionForm.get('password')?.invalid && (inscriptionForm.get('password')?.dirty || inscriptionForm.get('password')?.touched)" class="error-message">
+                <div *ngIf="inscriptionForm.get('password')?.errors?.['required']">Le mot de passe est requis.</div>
+                <div *ngIf="inscriptionForm.get('password')?.errors?.['minlength']">Le mot de passe doit comporter au moins 6 caractères.</div>
+            </div>
+        </div>
+        <button type="submit" [disabled]="!inscriptionForm.valid" class="btn btnprim">Se connecter</button>
+         
+        <p>Vous n'avez pas de compte? <a routerLink="/inscription"> S'inscrire</a></p>
+    </form>
+</div>-->
+<div class="container forms">
+    <div class="form login">
+        <div class="form-content">
+            <header>Se connecter</header>
+            <form [formGroup]="connexionForm" (ngSubmit)="onSubmit()" novalidate>
+                <div class="field input-field">
+                    <input type="email" placeholder="Email" class="input" id="email" formControlName="email">   
+                </div>
+                <div *ngIf="connexionForm.get('email')?.invalid && (connexionForm.get('email')?.dirty || connexionForm.get('email')?.touched)" class="error-message">
+                    <div *ngIf="connexionForm.get('email')?.errors?.['required']">L'email est obligatoire.</div>
+                    <div *ngIf="connexionForm.get('email')?.errors?.['email']">Format d'email invalide.</div>
+                </div>
+                <div class="field input-field">
+                    <input type="password" placeholder="Mot de passe" class="password"  id="password" formControlName="password">
+                    <i class='bx bx-hide eye-icon'></i>
+                </div>
+                <div *ngIf="connexionForm.get('password')?.invalid && (connexionForm.get('password')?.dirty || connexionForm.get('password')?.touched)" class="error-message">
+                    <div *ngIf="connexionForm.get('password')?.errors?.['required']">Le mot de passe est obligatoire.</div>
+                    <div *ngIf="connexionForm.get('password')?.errors?.['minlength']">Le mot de passe doit comporter au moins 6 caractères.</div>
+                </div>
+                <div class="forgot-pass">
+                    <a href="#" >Mot de passe oublié?</a>
+                </div>
+                <div class="field button-field">
+                    <button type="submit" [disabled]="!connexionForm.valid" class="btn btnprim">Se connecter</button>
+                </div>
+            </form>
+            <div class="form-link">
+                <span>Vous n'avez pas de compte? <a routerLink="/inscription" class="link signup-link"> S'inscrire</a></span>
+            </div>
+        </div>
+        
+    </div>
+    
+</div>

@@ -1,0 +1,81 @@
+<mat-card class="result-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>fingerprint</mat-icon>
+      Détection d'empreinte
+    </mat-card-title>
+    <mat-card-subtitle>
+      Modèle utilisé : {{ result!.model }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <div class="result-details">
+      <div class="detail-item">
+        <span class="label">ID suspect:</span>
+        <span class="value">{{ result!.data!.predicted_class }}</span>
+      </div>
+      <div class="detail-item">
+        <span class="label">Probabilité:</span>
+        <span class="value">{{ result!.data!.Probability }} %</span>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="metadata">
+      <!--<small>
+        <mat-icon>schedule</mat-icon>
+        Temps d'analyse : {{ predictionResult.processingTime }}s
+      </small>-->
+      <small>
+        <mat-icon>today</mat-icon>
+        Date d'analyse : {{ result!.timestamp| date:'medium' }}
+      </small>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+<!--<div class="model-selector">
+    <div class="model-card" 
+         *ngFor="let model of models"
+         [class.selected]="selectedModel === model.name"
+         (click)="onModelSelect(model.name)">
+      <h3>{{ model.name }}</h3>
+    </div>
+  </div>
+  
+  <div *ngIf="error" class="error">
+    {{ error }}
+  </div>
+  
+  <div *ngIf="progress > 0" class="progress">
+    <progress [value]="progress" max="100"></progress>
+    {{ progress }}%
+  </div>
+  
+  <button 
+    class="analyze-btn"
+    (click)="analyze()"
+    [disabled]="!file || !selectedModel">
+    Lancer l'analyse
+  </button>
+  
+  <div *ngIf="result" class="results">
+    <h3>Résultats de l'analyse ({{ result.model }})</h3>
+    <div class="metadata">
+      <span>Date : {{ result.timestamp | date:'medium' }}</span>
+    </div>
+    
+    <div class="predictions">
+      <div *ngFor="let prediction of result.predictions" 
+           class="prediction-item">
+        <span class="label">{{ prediction.label }}</span>
+        <span class="confidence">{{ prediction.confidence | percent }}</span>
+      </div>
+    </div>
+  </div>-->
+
+ 

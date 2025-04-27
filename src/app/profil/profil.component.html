@@ -1,0 +1,309 @@
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container light-style flex-grow-1 container-p-y">
+    <div class="card overflow-hidden">
+        <div class="row no-gutters row-bordered row-border-light">
+            <div class="col-md-3 pt-0">
+                <div class="list-group list-group-flush account-settings-links">
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                       *ngFor="let link of links" (click)="setActiveLink(link)" [class.active]="link === activeLink">{{link.label}}</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <!-- Profil -->
+                    <div class="tab-pane fade" id="account-general" *ngIf="activeLink.label === 'Profil'" [class.active]="activeLink.label === 'Profil'"
+                    [class.show]="activeLink.label === 'Profil'">
+                        
+                 
+
+                        <div class="container mt-5">
+                        <div class="card p-3 d-flex flex-row align-items-center shadow-sm" style="border-radius: 12px;">
+                            <div class="position-relative" style="width: 80px; height: 80px;">
+                                <img 
+                                  [src]="imagePreviewUrl || 'https://via.placeholder.com/80'" 
+                                  class="rounded-circle" 
+                                  alt="Profile Image" 
+                                  width="80" 
+                                  height="80"
+                                  (click)="fileInput.click()"
+                                  style="cursor: pointer; object-fit: cover;"
+                                >
+                                <input 
+                                  type="file" 
+                                  #fileInput 
+                                  (change)="onFileSelected($event)" 
+                                  style="display: none;"
+                                  accept="image/*"
+                                >
+                              </div>
+                            <div class="ml-3">
+                            <h5 class="mb-1">{{ user.user_info.first_name }} {{ user.user_info.last_name }}</h5>
+                            <p class="text-muted mb-0">{{ user.user_info.grade }}</p>
+                            </div>
+                        </div>
+                        </div>
+                        <form class="card-body" [formGroup]="profileForm" (ngSubmit)="SaveModifications()" novalidate>
+                            
+                            <div class="form-group row gx-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="labels mb-1">Nom</label>
+                                    <input type="text" class="form-control" placeholder="Nom" [value]="user.user_info.last_name" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels mb-1">Prénom</label>
+                                    <input type="text" class="form-control" placeholder="Prénom" [value]="user.user_info.first_name" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group row gx-3 mb-3">
+                                <div class="col-md-6">
+                                    <label class="labels mb-1">CIN</label>
+                                    <input type="text" class="form-control" [value]="user.user_info.cin" readonly>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels mb-1">Matricule</label>
+                                    <input type="text" class="form-control" [value]="user.user_info.matricule" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="labels">Email</label><input type="text" class="form-control" formControlName="email" >
+                            </div>
+                            <div class="form-group">
+                                <label class="labels">Grade</label>
+                                <input type="text" class="form-control" [value]="user.user_info.grade" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="labels">Agence Rattachement</label>
+                                <input type="text" class="form-control" [value]="user.user_info.agence_ratt" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="labels">Service</label>
+                                <input type="text" class="form-control" [value]="user.user_info.service" readonly>
+                            </div>
+
+                            <!-- Affichage et modification de l'image -->
+                            <!--<div class="form-group">
+                                <label class="labels">Image de profil</label>
+                                <div class="image-container position-relative d-flex flex-column">
+                                  <img
+                                  *ngIf="imagePreviewUrl"
+                                  [src]="imagePreviewUrl"                                
+                                    alt="Image de profil"
+                                    class="rounded-circle shadow-sm profile-image mb-2"
+                                  />
+                                  <label for="imageInput" class="btn btn-sm btn-outline-primary">Changer la photo</label>
+                                  <input
+                                    type="file"
+                                    id="imageInput"
+                                    class="d-none"
+                                    (change)="onFileSelected($event)"
+                                  />
+                                </div>
+                              </div>-->
+
+                            <!-- Formulaire de sauvegarde -->
+                            <div class="text-right mt-3">
+                                <button type="submit" class="btn btn-default btnsec" [disabled]="!profileForm.valid">Sauvegarder</button>&nbsp;
+                                <button type="button" class="btn btn-default" (click)="forminit()">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Modifier mot de passe -->
+                    <div class="tab-pane fade" id="account-change-password" *ngIf="activeLink.label === 'Modifier mot de passe'" [class.active]="activeLink.label === 'Modifier mot de passe'"
+                    [class.show]="activeLink.label === 'Modifier mot de passe'">
+                        <form [formGroup]="passewordForm" class="card-body" (ngSubmit)="Changepwd()" novalidate>
+                            <div class="form-group">
+                                <label class="labels">Mot de passe actuel</label>
+                                <input type="password" class="form-control mb-1" formControlName="actuelpwd" placeholder="Mot de passe actuel">
+                            </div>
+                            <div class="form-group">
+                                <label class="labels">Nouveau Mot de Passe</label>
+                                <input type="password" class="form-control mb-1" formControlName="newpwd" placeholder="Nouveau Mot de Passe">
+                            </div>
+                            <div class="form-group">
+                                <label class="labels">Confirmer le nouveau Mot de Passe</label>
+                                <input type="password" class="form-control mb-1" formControlName="newpwdconfirm" placeholder="Confirmer le nouveau mot de passe">
+                            </div>
+                            <div class="text-right mt-3">
+                                <button type="submit" class="btn btn-default btnsec" [disabled]="!passewordForm.valid">Sauvegarder</button>&nbsp;
+                                <button type="button" class="btn btn-default" (click)="this.passewordForm.reset()">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Dashboard -->
+                    <div class="tab-pane fade" *ngIf="activeLink.label === 'Dashboard'" [class.active]="activeLink.label === 'Dashboard'" [class.show]="activeLink.label === 'Dashboard'">
+                        <h2>Tableau de bord</h2>
+                        <p>Contenu spécifique du tableau de bord...</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<div class="container light-style flex-grow-1 container-p-y">
+ 
+    <div class="card overflow-hidden">
+        <div class="row no-gutters row-bordered row-border-light">
+            <div class="col-md-3 pt-0">
+                <div class="list-group list-group-flush account-settings-links">
+    
+                    <a class="list-group-item list-group-item-action" data-toggle="list"
+                       *ngFor="let link of links" (click)="setActiveLink(link)"[class.active]="link === activeLink" >{{link.label}} </a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade" id="account-general" *ngIf="activeLink.label === 'Profil'" [class.active]="activeLink.label === 'Profil'"
+                    [class.show]="activeLink.label === 'Profil'">
+                        
+                        <hr class="border-light m-0">
+                    
+                        
+                        <form class="card-body" [formGroup]="profileForm" (ngSubmit)="SaveModifications()" novalidate>
+                            <div class="form-group row gx-3 mb-3" >
+                                <div class="col-md-6">
+                                    <label class="labels mb-1">Nom<span style="color: red;">*</span></label><input type="text" class="form-control" placeholder="Nom" formControlName="last_name">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="labels mb-1">Prenom<span style="color: red;">*</span></label><input type="text" class="form-control" placeholder="Prenom" formControlName="first_name" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="labels">Email</label><input type="text" class="form-control" [value]="user.user_auth.email" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="labels">Telephone <span style="color: red;">*</span></label><input type="text" class="form-control" placeholder="Numero de telephone" formControlName="phone" >
+                            </div>    
+                            <div class="form-group">
+                                <label class="labels">Adresse</label><input type="text" class="form-control mb-1" formControlName="address" placeholder="Adresse">
+                            </div>
+                            
+                            <div class="text-right mt-3">
+                                <button type="submit" class="btn btn-default btnsec" [disabled]="!profileForm.valid">Sauvegarder</button>&nbsp;
+                                <button type="button" class="btn btn-default" (click)="forminit()">Annuler</button>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <div class="tab-pane fade" id="account-change-password" *ngIf="activeLink.label === 'Modifier mot de passe'" [class.active]="activeLink.label === 'Modifier mot de passe'"
+                    [class.show]="activeLink.label === 'Modifier mot de passe'">
+                      
+
+                        <form [formGroup]="passewordForm" class="card-body" (ngSubmit)="Changepwd()" novalidate>
+                        <div class="form-group">
+                            <label class="labels">Mot de passe actuel</label><input type="password" class="form-control mb-1" formControlName="actuelpwd" placeholder="Mot de passe actuel" value="">
+                        </div>
+                        <div *ngIf="passewordForm.get('actuelpwd')?.invalid && (passewordForm.get('actuelpwd')?.dirty || passewordForm.get('actuelpwd')?.touched)" class="error-message">
+                            <div *ngIf="passewordForm.get('actuelpwd')?.errors?.['required']">Le mot de passe actuel est obligatoire.</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="labels">Nouveau Mot de Passe</label><input type="password" class="form-control mb-1" formControlName="newpwd" placeholder="Nouveau Mot de Passe" value="">
+                        </div>
+                        <div *ngIf="passewordForm.get('newpwd')?.invalid && (passewordForm.get('newpwd')?.dirty || passewordForm.get('newpwd')?.touched)" class="error-message">
+                            <div *ngIf="passewordForm.get('newpwd')?.errors?.['required']">Le nouveau mot de passe est obligatoire.</div>
+                            <div *ngIf="passewordForm.get('newpwd')?.errors?.['minlength']">Le mot de passe doit comporter au moins 6 caractères.</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="labels">Confirmé Nouveau Mot de Passe</label><input type="password" id="newpwdconfirm" class="newpwdconfirm form-control mb-1" formControlName="newpwdconfirm" placeholder="Nouveau Mot de Passe" value="">
+                        </div>
+                        <div *ngIf="passewordForm.get('newpwdconfirm')?.invalid && (passewordForm.get('newpwdconfirm')?.dirty || passewordForm.get('newpwdconfirm')?.touched)" class="error-message">
+                            <div *ngIf="passewordForm.get('newpwdconfirm')?.errors?.['required']">Veuillez confirmer votre mot de passe.</div>
+                        </div>
+                        <div *ngIf="!passewordForm.get('newpwdconfirm')?.invalid && !(passewordForm.get('newpwdconfirm')?.dirty && !passewordForm.get('newpwdconfirm')?.touched) && passewordForm.errors?.['PasswordNoMatch']" class="error-message">Les mots de passe ne correspondent pas.</div>                     
+                        <div class="text-right mt-3">
+                            <button type="submit" class="btn btn-default btnsec" [disabled]="!passewordForm.valid">Sauvegarder</button>&nbsp;
+                            <button type="button" class="btn btn-default" (click)="this.passewordForm.reset()">Annuler</button>
+                        </div>
+                    </form>
+                    </div>
+
+
+                        
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="" *ngIf="activeLink.label === 'Dashboard'" [class.active]="activeLink.label === 'Dashboard'"
+                    [class.show]="activeLink.label === 'Dashboard'">
+          <h2>Dashboard Content</h2>
+          <p>Contenu spécifique du tableau de bord...</p>
+      </div>
+</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<mat-toolbar color="primary">
+    <button mat-icon-button aria-label="Menu icon">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1>Responsive Material Sidenavigation</h1>
+</mat-toolbar>-->
+<!--<mat-sidenav-container autosize>
+    <mat-sidenav [opened]="true" mode="side">
+      <mat-nav-list>
+        <a mat-list-item (click)="activeLink = 'Dashboard'">
+          <span class="entry">
+            <mat-icon>house</mat-icon>
+            <span>Dashboard</span>
+          </span>
+        </a>
+        <a mat-list-item (click)="activeLink = 'Settings'">
+            <span class="entry">
+              <mat-icon>settings</mat-icon>
+              <span>Settings</span>
+            </span>
+          </a>
+          <a mat-list-item (click)="activeLink = 'Settings'">
+            <span class="entry">
+              <mat-icon>account_circle</mat-icon>
+              <span>Profile</span>
+            </span>
+          </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <div *ngIf="activeLink">
+        <ng-container *ngIf="activeLink.label === 'Dashboard'">
+          <h2>Dashboard Content</h2>
+          <p>Contenu spécifique du tableau de bord...</p>
+        </ng-container>
+        <ng-container *ngIf="activeLink.label === 'Settings'">
+          <h2>Settings Content</h2>
+          <p>Contenu spécifique des paramètres...</p>
+        </ng-container>
+        <ng-container *ngIf="activeLink.label === 'Profile'">
+          <h2>Profile Content</h2>
+          <p>Contenu spécifique du profil...</p>
+        </ng-container>
+      </div>
+  </mat-sidenav-container>-->
+
+  <!--
+  <mat-sidenav-container autosize>
+    <mat-sidenav [opened]="true" mode="side">
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let link of links" (click)="setActiveLink(link)">
+          <span class="entry">
+            <mat-icon>{{ link.icon }}</mat-icon>
+            <span>{{ link.label }}</span>
+          </span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>-->
+  
+   
+ 
