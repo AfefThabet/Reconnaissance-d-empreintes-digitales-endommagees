@@ -172,3 +172,22 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+dist/
+.angular/
+node_modules/
+server/node_modules/
+public/
+src/environments/*.ts
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+.cache/
+.turbo/
+.angular/cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
