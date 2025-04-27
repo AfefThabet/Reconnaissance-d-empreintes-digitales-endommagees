@@ -1,0 +1,94 @@
+<div class="enquete-details-container" >
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  
+    <div *ngIf="!isLoading && enquete" class="details-card">
+      <mat-card class="enquete-card">
+        <div  id="enquete-details" class="details-section">
+            <h2>Détails de l'enquête</h2>
+            <div class="details">
+            <p><strong>Titre :</strong> {{ enquete.title }}</p>
+          
+            <p *ngIf="enquete.description">
+              <strong>Description :</strong> {{ enquete.description }}
+            </p>
+          
+            <p>
+              <strong>Statut :</strong> {{ enquete.status }}
+            </p>
+          
+            <p>
+              <span [ngClass]="enquete.validation ? 'valid' : 'not-valid'">
+                {{ enquete.validation ? '✅ Validée' : '❌ Non validée' }}
+              </span>
+            </p>
+            </div>
+            <div *ngIf="imagePreviewUrl" class="image-preview">
+              <p><strong>Image de l'empreinte</strong></p>
+              <img [src]="imagePreviewUrl" alt="Aperçu de l'image" />
+            </div>
+            <mat-card class="prediction-card" *ngIf="predictions.length > 0">
+                <mat-card-title>Prédictions</mat-card-title>
+                <mat-card-content>
+                  <table class="prediction-table">
+                    <thead>
+                      <tr>
+                        <th>Modèle</th>
+                        <th>Classe Prédit</th>
+                        <th>Probabilité</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let prediction of predictions">
+                        <td>{{ prediction.model }}</td>
+                        <td>{{ prediction.predicted_class }}</td>
+                        <td>{{ prediction.proba }}%</td>
+                        <td>{{ prediction.timestamp | date: 'short' }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </mat-card-content>
+              </mat-card>
+              
+              <mat-card class="validation-card" *ngIf="enquete.validation">
+                <mat-card-title>Validation</mat-card-title>
+                <mat-card-content>
+                  <div *ngIf="enquete.validation.models && enquete.validation.models.length > 0">
+                    <p><strong>Modèles validés :</strong></p>
+                    <ul>
+                      <li *ngFor="let model of enquete.validation.models">{{ model }}</li>
+                    </ul>
+                  </div>
+              
+                  <div *ngIf="enquete.validation.coment">
+                    <p><strong>Décision :</strong> {{ enquete.validation.coment }}</p>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+        </div>          
+        
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="goBack()">Retour</button>
+          <button mat-button color="warn" (click)="supprimerEnquete()">Supprimer</button>
+          <mat-menu #pdfMenu="matMenu">
+            <button mat-menu-item (click)="downloadPDF()">
+              <mat-icon>download</mat-icon> Télécharger
+            </button>
+            <button mat-menu-item (click)="sendEmailWithPDF()">
+              <mat-icon>email</mat-icon> Envoyer par e-mail
+            </button>
+            <button mat-menu-item (click)="printPDF()">
+              <mat-icon>print</mat-icon> Imprimer
+            </button>
+          </mat-menu>
+          
+          <button mat-raised-button color="primary" [matMenuTriggerFor]="pdfMenu">
+            Générer PDF
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+  

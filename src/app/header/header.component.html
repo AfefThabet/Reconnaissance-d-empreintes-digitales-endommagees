@@ -1,0 +1,68 @@
+
+<!-- Header Area -->
+<header class="header" >
+    <!-- Header Inner -->
+    <div class="header-inner">
+    <div class="container-fluid">
+    <div class="inner">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-12">
+          <!-- Start Logo -->
+          <div class="logo">
+            <a routerLink="/home"><img src="Investria_logo.png" alt="logo"></a>
+          </div>
+          <!-- End Logo -->
+          <!-- Mobile Nav -->
+          <div class="mobile-nav"></div>
+          <!-- End Mobile Nav -->
+        </div>
+        <div class="col-lg-5 col-md-10 col-12">
+          <!-- Main Menu -->
+          <div class="main-menu" *ngIf="isLogged">
+            <nav class="navigation">
+              <ul class="nav menu">
+                <li routerLinkActive="active"><a routerLink="/archives">Archives</a></li>
+                <!--<li><a>Nouvelle enquete<i class="icofont-rounded-down"></i></a>
+                  <ul class="dropdown">
+                    <li><a routerLink="/Nos-offres">Enquetes en cours</a></li>
+                    <li><a routerLink="/inscription-prestataire">Devenir partenaire</a></li>
+                  </ul></li>-->
+                <li routerLinkActive="active"><a routerLink="/enquetes-en-cours">Enquetes en cours</a></li>
+                <li routerLinkActive="active"><a routerLink="/nouvelle-enquete">Nouvelle enquete</a></li>
+              </ul>
+            </nav>
+          </div>
+          <!--/ End Main Menu -->
+        </div>
+        <div class="row">
+          <div [hidden]="isLogged" class="col-lg-auto col-12">
+            <div class="get-quote">
+              <a routerLink="/connexion" class="btn btnsec">Connectez-vous</a>
+            </div>
+          </div>
+          <div [hidden]="isLogged" class="col-lg-auto col-12">
+            <div class="get-quote">
+              <a routerLink="/inscription" class="btn btnprim">Créer un compte</a>
+            </div>
+          </div>
+
+          <nav class="navigation">
+          <ul class="nav menu">
+            <li *ngIf="isLogged">
+              <a>{{firstname}} {{lastname}}</a>
+              <img *ngIf="imageUrl" [src]="imageUrl" alt="Profile" class="profile-image">
+              <ul class="dropdown">
+                <li><a [routerLink]="this.profilelink">Profil</a></li>
+                <li><a routerLink="/connexion" (click)="logout()">Déconnexion</a></li>
+              </ul>
+              
+            </li>
+          </ul>
+        </nav>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    <!--/ End Header Inner -->
+    </header>

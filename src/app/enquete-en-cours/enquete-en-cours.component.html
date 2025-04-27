@@ -1,0 +1,89 @@
+<div class="enquetes-container">
+  <h2>Enquêtes en cours</h2>
+
+  <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <div class="cards-container" *ngIf="!isLoading && (enquetes$ | async)?.length">
+    <mat-card 
+      *ngFor="let enquete of enquetes$ | async; trackBy: trackById" 
+      class="enquete-card"
+    >
+      <mat-card-header>
+        <mat-card-title>{{ enquete.title }}</mat-card-title>
+        <mat-card-subtitle>{{ enquete.createdAt | date: 'medium' }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>{{ enquete.description }}</p>
+        <p>
+          <span [ngClass]="enquete.validation ? 'valid' : 'not-valid'">
+            {{ enquete.validation ? '✅ Validée' : '❌ Non validée' }}
+          </span>
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button class="archive-button" 
+                *ngIf="enquete.validation" 
+                mat-button 
+                color="warn" 
+                (click)="archive(enquete._id)">
+          Archiver
+        </button>
+        <button class=" btn btn-default btnsec" 
+                *ngIf="!enquete.validation" 
+                mat-button 
+                (click)="valider(enquete._id)"
+                >
+          Valider
+        </button>
+        <button mat-button color="warn" (click)="supprimer(enquete._id)">Supprimer</button>
+        <button mat-button color="primary" [routerLink]="['/details', enquete._id]">Détails</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <div *ngIf="!isLoading && (enquetes$ | async)?.length === 0" class="empty">
+    Aucune enquête en cours pour le moment.
+  </div>
+</div>
+<!--<div class="enquetes-container">
+    <h2>Enquêtes en cours</h2>
+  
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+  
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  
+    <div class="cards-container" *ngIf="!isLoading && enquetes.length">
+      <mat-card *ngFor="let enquete of enquetes" class="enquete-card">
+        <mat-card-header>
+          <mat-card-title>{{ enquete.title }}</mat-card-title>
+          <mat-card-subtitle>{{ enquete.createdAt | date: 'medium' }}</mat-card-subtitle>
+        </mat-card-header>
+  
+        <mat-card-content>
+          <p>{{ enquete.description }}</p>
+          <p>
+            <span [ngClass]="enquete.validation ? 'valid' : 'not-valid'">
+              {{ enquete.validation ? '✅ Validée' : '❌ Non validée' }}
+            </span>
+          </p>
+        </mat-card-content>
+  
+        <mat-card-actions>
+            <button class="archive-button" *ngIf="enquete.validation" mat-button color="warn" (click)="archive(enquete._id)">Archiver</button>
+          <button mat-button color="warn" (click)="supprimer(enquete._id)">Supprimer</button>
+          <button mat-button color="primary" [routerLink]="['/details', enquete._id]">Détails</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  
+    <div *ngIf="!isLoading && enquetes.length === 0" class="empty">
+      Aucune enquête en cours pour le moment.
+    </div>
+  </div>-->
+  
+
+  

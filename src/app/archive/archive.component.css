@@ -1,0 +1,211 @@
+/*.enquetes-container {
+    padding: 20px;
+  }
+  
+  .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .enquete-card {
+    width: 300px;
+  }
+  
+  .empty {
+    text-align: center;
+    margin-top: 30px;
+    color: gray;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+    margin: 20px 0;
+  }*/
+  .enquetes-container {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: 100vh;
+  }
+  
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #020873;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cards-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* max 3 par ligne */
+    gap: 2rem;
+    padding: 1rem;
+  }
+  
+  @media (max-width: 1024px) {
+    .cards-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 par ligne en écran moyen */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .cards-container {
+      grid-template-columns: 1fr; /* 1 par ligne en mobile */
+    }
+  }
+  
+  
+  .enquete-card {
+    background: white;
+    border-radius: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    position: relative;
+    border-left: 4px solid rgb(0, 92, 187, 0.8);
+  }
+  
+  .enquete-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  mat-card-header {
+    background: linear-gradient(45deg, rgb(0, 92, 187) 0%, rgb(0, 92, 187) 100%);
+    padding: 1rem !important;
+    color: white !important;
+    border-radius: 15px 15px 0 0 !important;
+  }
+  
+  mat-card-title {
+    font-size: 1.4rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.5px;
+  }
+  
+  mat-card-subtitle {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 0.9rem !important;
+  }
+  
+  mat-card-content {
+    padding: 1.5rem;
+    color: #4a5568;
+    line-height: 1.6;
+    min-height: 120px;
+  }
+  
+  mat-card-actions {
+    padding: 1rem !important;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    background: #f8f9fa;
+    border-top: 1px solid #edf2f7;
+  }
+  
+  button[mat-button] {
+    border-radius: 8px !important;
+    padding: 0.5rem 1.5rem !important;
+    transition: all 0.3s ease !important;
+    border: 2px solid transparent !important;
+  }
+  
+  button[color="warn"] {
+    background: linear-gradient(45deg, #dc3545 0%, #dc3545 100%);
+    color: white !important;
+  }
+  
+  button[color="primary"] {
+    background: linear-gradient( rgb(0, 92, 187) 0%, rgb(0, 92, 187) 100%);
+    color: white !important;
+  }
+  
+  .archive-button {
+    background: linear-gradient(45deg, #1F4760 0%, #2B4F6E 100%) !important;
+    color: white !important;
+    margin-right: auto !important;
+  }
+  
+  .valid {
+    color: #2D5774;
+    background-color: #e9f4fb;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  
+  .not-valid {
+    color: #dc3545;
+    background-color: #fee2e2;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  
+  button[mat-button]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .error {
+    background: #dc3545;
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem;
+    text-align: center;
+    font-weight: bold;
+    animation: shake 0.5s ease-in-out;
+  }
+  
+  .empty {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #4a5568;
+    padding: 3rem;
+    background: white;
+    border-radius: 15px;
+    margin: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  mat-progress-bar {
+    margin: 1rem 0;
+    border-radius: 8px;
+  }
+  
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(10px); }
+    50% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+  }
+  
+  @media (max-width: 768px) {
+    .cards-container {
+      grid-template-columns: 1fr;
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+    }
+    
+    mat-card-actions {
+      flex-direction: column;
+    }
+    
+    button[mat-button] {
+      width: 100%;
+      text-align: center;
+    }
+    
+    .archive-button {
+      order: -1;
+    }
+  }

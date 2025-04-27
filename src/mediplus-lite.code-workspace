@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../../project/mediplus-lite"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "mediplus-lite"
+	}
+}

@@ -1,0 +1,14 @@
+<div class="sidebar">
+    <h2>FILTRER PAR</h2>
+  
+    <div class="filter-group">
+      <label>Catégorie:</label>
+      <div *ngFor="let category of categories">
+        <input 
+          type="checkbox" 
+          [value]="category"
+          (change)="onCategoryChange(category, $event)" />
+        {{ category }}
+      </div>
+    </div>
+  </div>
