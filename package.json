@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "investira-angular",
   "version": "0.0.0",
   "scripts": {
@@ -52,5 +53,10 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.4.2"
+=======
+  "dependencies": {
+    "ngx-swiper-wrapper": "^10.0.0",
+    "swiper": "^11.1.9"
+>>>>>>> 31438716191fde0e9bcc0f25d69ae691a297b1e3
   }
 }

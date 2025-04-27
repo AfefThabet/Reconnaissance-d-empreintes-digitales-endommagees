@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
@@ -18,3 +19,20 @@
     }
   ]
 }
+=======
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Angular Debug",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}/src"
+        }
+    ]
+}
+>>>>>>> 31438716191fde0e9bcc0f25d69ae691a297b1e3
